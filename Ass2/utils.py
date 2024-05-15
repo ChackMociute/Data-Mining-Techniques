@@ -131,7 +131,8 @@ def pipeline(df, enc, ret='torch', regression=True):
     if ret == 'pandas':
         return df, metadata
     if ret == 'numpy':
-        return df.to_numpy(), metadata.target.to_numpy()
+        try: return df.to_numpy(), metadata.target.to_numpy()
+        except AttributeError: return df.to_numpy()
     x = torch.tensor(df.to_numpy(), dtype=torch.float32, device='cuda')
     y = torch.tensor(metadata.target.to_numpy(), dtype=torch.float32, device='cuda').reshape(-1, 1)\
         if regression else torch.tensor(metadata.target.to_numpy(), dtype=torch.int64, device='cuda')

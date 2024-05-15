@@ -8,3 +8,4 @@ enc_*.npy
 ResNet.pt
 targets.csv
 test_pairs.csv
+ranker.pt
